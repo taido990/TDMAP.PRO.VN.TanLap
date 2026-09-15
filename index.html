@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>TDMAP.PRO.VN.TANLAP</title>
-  <!-- 110926  -->
+  <!-- 160926  -->
 
   <!-- ICON HIỂN THỊ TRÊN TAB TRÌNH DUYỆT + KHI TẠO PHÍM TẮT NGOÀI MÀN HÌNH ĐIỆN THOẠI  -->
   <!-- Đặt file app-icon.ico cùng thư mục với index.html (và manifest.json) trên server  -->
@@ -1389,238 +1389,6 @@
       flex-shrink: 0;
     }
 
-    /* SPLASH - nền là bản đồ Google Map (ảnh vệ tinh) đang tải phía sau, KHÔNG còn
-       màn trắng che kín như trước; nội dung (logo/nút chọn xã/hướng dẫn) đặt trong
-       1 "thẻ" nổi (#splashCard) để luôn dễ đọc dù ảnh vệ tinh phía sau có rối mắt.
-       pointer-events:none trên #splash để bản đồ phía sau vẫn xem/kéo được, chỉ
-       riêng #splashCard (pointer-events:auto) mới nhận thao tác chạm/bấm. */
-    #splash {
-      position: fixed;
-      inset: 0;
-      /* Phải CAO HƠN mọi panel nổi trên bản đồ (thanh tìm kiếm z-index:1000,
-         khối checkbox/legend TDMAP.PRO.VN góc phải-trên z-index:1002, control
-         zoom nhãn 1001...) - nếu không, trên điện thoại các panel đó sẽ đè lên
-         trên thẻ splash (như ảnh chụp thực tế cho thấy) thay vì bị che phía sau. */
-      z-index: 1500;
-      background: transparent;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      pointer-events: none;
-    }
-
-    #splashCard {
-      pointer-events: auto;
-      background: rgba(255, 255, 255, 0.97);
-      backdrop-filter: blur(6px);
-      border-radius: 20px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
-      padding: 20px 22px 18px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      width: 340px;
-      max-width: 92vw;
-      max-height: 90vh;
-      max-height: 90dvh;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    /* Điện thoại màn hình nhỏ / thấp: thu gọn khoảng cách, chữ, ảnh minh họa
-       để toàn bộ thẻ splash không bị tràn khỏi màn hình. */
-    @media (max-width: 400px), (max-height: 700px) {
-      #splash {
-        padding: 12px;
-      }
-
-      #splashCard {
-        padding: 14px 14px 12px;
-        gap: 5px;
-        border-radius: 16px;
-      }
-
-      #splash .project-title {
-        font-size: 12px;
-      }
-
-      #splash h2 {
-        font-size: 15px;
-      }
-
-      #splash .circle {
-        width: 60px;
-        height: 60px;
-        font-size: 26px;
-      }
-
-      #splash .circle-label {
-        font-size: 13px;
-        white-space: normal;
-      }
-
-      #splash p {
-        font-size: 12px;
-        line-height: 1.5;
-      }
-
-      #splash .splash-note {
-        padding: 8px 10px 10px;
-      }
-
-      #splash .splash-note-illus {
-        max-width: 170px;
-      }
-    }
-
-    #splash .brand {
-      font-size: 13px;
-      font-weight: 800;
-      color: #00c6a7;
-      letter-spacing: 3px;
-    }
-
-    #splash .circle {
-      width: 58px;
-      height: 58px;
-      border-radius: 50%;
-      background: rgba(0, 198, 167, 0.12);
-      border: 2px solid #00c6a7;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 26px;
-      cursor: pointer;
-      transition: background .2s;
-    }
-
-    #splash .circle:active {
-      background: rgba(0, 198, 167, 0.25);
-    }
-
-    #splash .circle-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 30px;
-    }
-
-    #splash .circle-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2px;
-    }
-
-    #splash .circle-label {
-      font-size: 15px;
-      font-weight: 800;
-      color: #e60000;
-      text-align: center;
-      line-height: 1.35;
-      white-space: nowrap;
-    }
-
-    #splash .circle-arrow {
-      font-size: 18px;
-      font-weight: 800;
-      color: #e60000;
-      line-height: 1;
-      margin-top: -6px;
-    }
-
-    #splash .circle.drive {
-      border-color: #e60000;
-      background: rgba(230, 0, 0, 0.1);
-    }
-
-    #splash .circle.drive:active {
-      background: rgba(230, 0, 0, 0.22);
-    }
-
-    #splash h2 {
-      font-size: 17px;
-      font-weight: 700;
-      color: #111;
-    }
-
-    #splash .project-title {
-      font-size: 13px;
-      font-weight: 700;
-      color: #333;
-      text-align: center;
-      line-height: 1.45;
-    }
-
-    #splash p {
-      font-size: 13px;
-      color: #555;
-      text-align: center;
-      line-height: 1.35;
-    }
-
-    /* Ghi chú: ranh bản đồ địa chính (đo đạc) so với ảnh vệ tinh nền có thể lệch nhau */
-    #splash .splash-note {
-      width: 100%;
-      background: #fff8e1;
-      border: 1px solid #ffd54f;
-      border-radius: 12px;
-      padding: 10px 12px 12px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-    }
-
-    #splash .splash-note-title {
-      font-size: 12.5px;
-      font-weight: 800;
-      color: #a15c00;
-      text-align: center;
-    }
-
-    #splash .splash-note-text {
-      font-size: 11.5px;
-      color: #6b4c00;
-      text-align: center;
-      line-height: 1.55;
-      margin: 0;
-    }
-
-    #splash .splash-note-illus {
-      width: 100%;
-      max-width: 230px;
-      height: auto;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
-      margin-top: 2px;
-    }
-
-    #splash .splash-note-legend {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      justify-content: center;
-      font-size: 10.5px;
-      font-weight: 700;
-      color: #444;
-      margin-top: 2px;
-    }
-
-    #splash .splash-note-legend span {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    #splash .splash-note-legend i {
-      display: inline-block;
-      width: 14px;
-      height: 3px;
-      border-radius: 2px;
-    }
-
     /* DROP OVERLAY */
     #dropOverlay {
       position: fixed;
@@ -1990,39 +1758,6 @@
 </head>
 
 <body class="hide-lbl-bg">
-
-  <div id="splash">
-    <div id="splashCard">
-      <div class="brand">TDMAP.PRO.VN</div>
-      <div style="display:flex;flex-direction:column;align-items:center;gap:1px;">
-        <h2>Tra cứu thông tin thửa đất</h2>
-        <div class="project-title">phường Tân Lập, tỉnh Đắk Lắk</div>
-      </div>
-      <div class="circle-row">
-        <div class="circle-item">
-          <div class="circle drive" onclick="startMapFromSplash()">🗺️</div>
-          <span class="circle-arrow">👆</span>
-        </div>
-      </div>
-      <p style="font-weight:800;color:#e60000;">Bấm vào biểu tượng để xem bản đồ<br>ranh thửa trên ảnh vệ tinh</p>
-
-      <div class="splash-note">
-        <div class="splash-note-title">⚠️ Lưu ý về ranh thửa trên bản đồ</div>
-        <p class="splash-note-text">
-          Ranh bản đồ địa chính (đo đạc) và ranh trên ảnh vệ tinh nền (Google Map)
-          có thể <b>không khớp hoàn toàn</b> do sai số ảnh và thời điểm chụp khác nhau.
-          Ranh hiển thị trên bản đồ chỉ mang tính <b>tham khảo về vị trí và hình thể</b>,
-          không thay thế hồ sơ đo đạc chính thức.
-        </p>
-        <img class="splash-note-illus" src="ranh-minh-hoa.jpg" alt="Minh họa ranh ảnh Google Map (đỏ) so với ranh bản đồ đo đạc (vàng)">
-
-        <div class="splash-note-legend">
-          <span><i style="background:#ff2d2d"></i>Ranh ảnh Google Map</span>
-          <span><i style="background:#ffd400"></i>Ranh bản đồ đo đạc</span>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <div id="map"></div>
 
@@ -2515,10 +2250,9 @@
       document.getElementById('requiredDocsOverlay').classList.remove('show');
     }
 
-    // Hiện trước hộp thoại hướng dẫn giấy tờ NGAY KHI bấm "Xem bản đồ" ở màn
-    // hình chào (KHÔNG phải sau khi gửi đăng ký như trước) - để người dân biết
-    // trước cần chuẩn bị gì, đỡ phải đi lại nhiều lần. Bản đồ vẫn tải song song
-    // phía sau, không bị hộp thoại này chặn lại.
+    // Hiện hộp thoại hướng dẫn giấy tờ NGAY KHI vào trang (KHÔNG phải sau khi gửi
+    // đăng ký như trước) - để người dân biết trước cần chuẩn bị gì, đỡ phải đi lại
+    // nhiều lần. Bản đồ vẫn tải song song phía sau, không bị hộp thoại này chặn lại.
     function startMapFromSplash() {
       openRequiredDocsOverlay('Vui lòng chuẩn bị trước các giấy tờ sau để việc đăng ký đất đai được nhanh chóng', '📋');
       loadTanLapMap(true);
@@ -5025,7 +4759,6 @@
       FileProgress.setLabel(`Đang hiển thị ${allParcels.length} thửa lên bản đồ...`);
       await renderParcels(allParcels, frac => FileProgress.set(parseEnd + frac * (100 - parseEnd)));
       renderRanhThon(result.ranhThon);
-      document.getElementById('splash').style.display = 'none';
       const soThonLines = (result.ranhThon && result.ranhThon.lines) ? result.ranhThon.lines.length : 0;
       const thonNote = soThonLines > 0 ? ` (kèm ranh thôn)` : '';
       FileProgress.finish(`✓ Xong · ${allParcels.length} thửa`);
@@ -5594,12 +5327,10 @@ body.hide-lbl-bg .lbl-style {
 }`;
     document.head.appendChild(s);
 
-    // ── BỎ QUA MÀN HÌNH CHÀO (SPLASH) ────────────────────────────────────────────
-    // Theo yêu cầu: KHÔNG bắt người dân bấm vào biểu tượng bản đồ ở màn hình chào
-    // nữa. Ẩn #splash ngay khi trang vừa tải xong và tự động làm y như khi bấm
-    // biểu tượng đó (hiện bảng hướng dẫn giấy tờ đăng ký đất đai + tự tải bản đồ
-    // Google Drive song song phía sau).
-    document.getElementById('splash').style.display = 'none';
+    // ── TỰ ĐỘNG MỞ BẢN ĐỒ NGAY KHI VÀO TRANG ─────────────────────────────────────
+    // Đã bỏ hẳn màn hình chào (splash) - trang vừa tải xong tự hiện bảng hướng
+    // dẫn giấy tờ đăng ký đất đai + tự tải bản đồ Google Drive song song phía sau,
+    // không cần người dân bấm vào biểu tượng nào nữa.
     startMapFromSplash();
   </script>
 </body>
